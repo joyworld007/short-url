@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+  <meta charset="utf-8">
+  <title>URL Shortening Service</title>
+  <style> input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=button] {
+    width: 100%;
+    background-color: orange;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  input[type=button]:hover {
+    background-color: OrangeRed;
+  }
+
+  input[type=text]:focus {
+    background-color: lightblue;
+    border: 3px solid #555;
+  }
+
+  div.formtag {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 40px;
+  }
+  </style>
+  <script>
+    $(document).ready(function () {
+
+      $('#generate').click(function () {
+        console.log($('#orgUrl').val());
+        $.ajax(
+            {
+              type: "POST",
+              url: '/v1/short-urls',
+              data: JSON.stringify({
+                orgUrl: $('#orgUrl').val()
+              }),
+              contentType: "application/json",
+              dataType: "text",
+              success: function (res) {
+                let obj = JSON.parse(res);
+                console.log(obj)
+                if(obj.code == "FAIL"
+                    && obj.message == "INVALID_URL" ) {
+                  alert('유효한 URL이 아닙니다');
+                  $('#orgUrl').focus();
+                  return false;
+                }
+                $('#shortUrl').val(obj.result.entry.url);
+              },
+              error: function (xhr, status, error) {
+                console.log(error);
+              }
+            }
+        );
+        return false;
+      });
+    });
+  </script>
+</head>
+<body>
+<h3>URL Shortening Service</h3>
+<div class="formtag">
+  <form id="urlForm">
+    <label for="orgUrl">Origin URL</label>
+    <input type="text" id="orgUrl">
+    <label for="shortUrl">Short URL</label>
+    <input type="text" id="shortUrl">
+    <input type="button" id="generate" value="만들기">
+  </form>
+</div>
+
+</body>
+</html>
