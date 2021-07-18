@@ -14,7 +14,7 @@
 
 ### <a name="chapter-1"></a>Specifications 
 ````
- OpenJDK11
+ OpenJDK15
  Spring Boot 2.3.0.RELEASE
  Spring Data Redis
  Embed Redis 

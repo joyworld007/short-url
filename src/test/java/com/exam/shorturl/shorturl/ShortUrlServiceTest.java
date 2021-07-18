@@ -85,7 +85,7 @@ public class ShortUrlServiceTest {
         naverApiRequest = new HttpEntity(map, headers);
         apiResult = ApiResult.builder()
             .hash("abcdbefh")
-            .orgurl("http://www.musinsa.com")
+            .orgUrl("http://www.musinsa.com")
             .url("localhost:8080/abcdbefh")
             .build();
         apiResponse = ApiResponse.builder()

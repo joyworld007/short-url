@@ -38,7 +38,6 @@ dependencies {
     implementation "it.ozimov:embedded-redis:0.7.2"
     implementation "org.webjars:jquery:3.4.1"
 
-
     implementation 'org.projectlombok:lombok:1.18.4'
 
     annotationProcessor('org.projectlombok:lombok:1.18.4')

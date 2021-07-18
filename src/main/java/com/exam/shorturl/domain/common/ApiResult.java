@@ -15,5 +15,5 @@ public class ApiResult {
 
   private String url;
   private String hash;
-  private String orgurl;
+  private String orgUrl;
 }
